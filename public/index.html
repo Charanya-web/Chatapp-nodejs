@@ -1,0 +1,111 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+  <meta charset="UTF-8"> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <title>Simple Chat</title> 
+
+</head> 
+
+<style> 
+
+body{ 
+
+height:100vh 
+
+} 
+
+li{ 
+
+list-style-type:none; 
+
+font-size:20px; 
+
+background-color:gray; 
+
+margin-top:10px; 
+
+} 
+
+button{ 
+
+background-color:green; 
+
+color:white; 
+
+margin-top:10px; 
+
+} 
+
+#messageInput{ 
+
+width:100%; 
+
+} 
+
+</style> 
+
+<body bgcolor='purple'> 
+
+ <h1><center>Name:D.Charanya</center></h1> 
+
+  <h1><center>Roll no:21UIT018</center></h1> 
+
+  <h1><center>Subject Code:IT2305</center></h1> 
+
+  <h1><center>Subject Name:Full Stack Web Development Laboratory</center></h1> 
+
+  <h1><center>Ex No:8 chat application using nodejs</center></h1>   
+
+  <ul id="messages"></ul> 
+
+  <input id="messageInput" autocomplete="off" /> 
+
+<center> 
+
+<button onclick="sendMessage()">Send</button></center> 
+
+  <script src="/socket.io/socket.io.js"></script> 
+
+  <script> 
+
+    const socket = io(); 
+
+ 
+
+    function sendMessage() { 
+
+      const messageInput = document.getElementById('messageInput'); 
+
+      const message = messageInput.value; 
+
+      messageInput.value = ''; 
+
+      socket.emit('chat message', message); 
+
+    } 
+
+ 
+
+    socket.on('chat message', (msg) => { 
+
+      const messages = document.getElementById('messages'); 
+
+      const li = document.createElement('li'); 
+
+      li.textContent = msg; 
+
+      messages.appendChild(li); 
+
+    }); 
+
+  </script> 
+
+</body> 
+
+</html> 
